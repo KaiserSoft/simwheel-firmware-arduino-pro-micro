@@ -165,11 +165,6 @@ void setup() {
   #endif
 
 
-  #if CONTROLLER_OUTPUT_MODE == 2
-    Joystick.setXAxis(0);
-    Joystick.setYAxis(512);
-  #endif
-  
   for( byte x=0 ; x < sizeof(ButtonPins)/sizeof(byte) ; ++x ){
     pinMode( ButtonPins[x], INPUT_PULLUP);
     ButtonPressed[x] = 0;
@@ -213,9 +208,11 @@ void setup() {
   #if CONTROLLER_OUTPUT_ENABLED == true
     #if CONTROLLER_OUTPUT_MODE == 1
       Keyboard.begin();
-    #else
+    #elif CONTROLLER_OUTPUT_MODE == 2
       Keyboard.begin();
       Joystick.begin();
+      Joystick.setXAxis(0);
+      Joystick.setYAxis(512);
     #endif
   #endif
 }
